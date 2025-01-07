@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "ml.vladmikh.projects.bankcard"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ml.vladmikh.projects.bankcard"
@@ -40,7 +40,8 @@ android {
 }
 
 dependencies {
-
+    //Navigation
+    implementation(libs.androidx.navigation.compose )
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,4 +57,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }
