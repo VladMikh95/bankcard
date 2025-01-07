@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrainsKotlinKsp)
+    alias(libs.plugins.hiltPlugin)
 }
 
 android {
@@ -40,8 +42,25 @@ android {
 }
 
 dependencies {
+
     //Navigation
     implementation(libs.androidx.navigation.compose )
+
+    //Dagger - Hilt
+    implementation (libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.dagger.compiler)
+    ksp(libs.hilt.compiler)
+
+    // Retrofit
+    implementation (libs.retrofit2.retrofit)
+    implementation(libs.retrofit2.converter)
+
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel)
+    // LiveData
+    implementation(libs.androidx.lifecycle.livedata)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

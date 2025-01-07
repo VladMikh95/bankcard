@@ -20,9 +20,14 @@ import androidx.navigation.NavController
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.graphics.Color
+import dagger.hilt.android.AndroidEntryPoint
 import ml.vladmikh.projects.bankcard.ui.card.CardScreen
+import ml.vladmikh.projects.bankcard.ui.card.CardViewModel
 import ml.vladmikh.projects.bankcard.ui.history.HistoryScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,9 @@ fun BankCardApp() {
     val navController = rememberNavController()
     Column(Modifier.padding(8.dp)) {
         NavHost(navController, startDestination = NavRoutes.Card.route) {
-            composable(NavRoutes.Card.route) { CardScreen() }
+            composable(NavRoutes.Card.route) {
+                val viewModel = hiltViewModel<CardViewModel>()
+                CardScreen(viewModel) }
             composable(NavRoutes.History.route) { HistoryScreen()  }
 
         }
