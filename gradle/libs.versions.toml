@@ -15,6 +15,7 @@ kotlinKsp = "2.0.21-1.0.27"
 retrofitVersion = "2.9.0"
 viewModelVersion = "2.6.1"
 liveDataVersion = "2.6.1"
+firebaseCrashlyticsBuildtools = "3.0.2"
 
 
 [libraries]
@@ -47,6 +48,7 @@ retrofit2-converter = {module = "com.squareup.retrofit2:converter-gson", version
 
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewModelVersion"}
 androidx-lifecycle-livedata = {module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "liveDataVersion"}
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
 
 [plugins]

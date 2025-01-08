@@ -34,20 +34,22 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BankcardTheme {
-                BankCardApp()
+                BankCardApp(Modifier)
             }
         }
     }
 }
 
 @Composable
-fun BankCardApp() {
+fun BankCardApp(
+    modifier: Modifier
+) {
     val navController = rememberNavController()
     Column(Modifier.padding(8.dp)) {
         NavHost(navController, startDestination = NavRoutes.Card.route) {
             composable(NavRoutes.Card.route) {
                 val viewModel = hiltViewModel<CardViewModel>()
-                CardScreen(viewModel) }
+                CardScreen(modifier,viewModel) }
             composable(NavRoutes.History.route) { HistoryScreen()  }
 
         }
