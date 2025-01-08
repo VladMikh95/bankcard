@@ -8,9 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -40,20 +38,35 @@ class CardViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<CardUIState>(CardUIState.Initial)
     val uiState: StateFlow<CardUIState> = _uiState
 
+    fun isCorrectInputText(text: String): Boolean {
+
+        var result = false
+
+        if(text.length in 6..8 && text.all { it in '0'..'9' }) {
+            result = true
+        }
+         return result
+    }
+
     fun getCardInfo() {
-        viewModelScope.launch {
 
-            _uiState.value = CardUIState.Loading
+        if (isCorrectInputText(bin)) {
+            viewModelScope.launch {
 
-            try {
-                val cardInfo = repository.getCardInfo(bin.toInt())
-                _uiState.value = CardUIState.Loaded(cardInfo)
-            } catch (e: IOException) {
-                _uiState.value = CardUIState.Error(ErrorLoadingCard.CONNECTION_ERROR)
-            } catch (e: HttpException) {
-                _uiState.value = CardUIState.Error(ErrorLoadingCard.ERROR_UNKNOWN)
+                _uiState.value = CardUIState.Loading
 
+                try {
+                    val cardInfo = repository.getCardInfo(bin.toInt())
+                    _uiState.value = CardUIState.Loaded(cardInfo)
+                } catch (e: IOException) {
+                    _uiState.value = CardUIState.Error(ErrorLoadingCard.CONNECTION_ERROR)
+                } catch (e: Exception) {
+                    _uiState.value = CardUIState.Error(ErrorLoadingCard.ERROR_UNKNOWN)
+
+                }
             }
+        } else {
+            _uiState.value = CardUIState.Error(ErrorLoadingCard.UNCORRECT_TEXT_LENGTH)
         }
     }
 }
