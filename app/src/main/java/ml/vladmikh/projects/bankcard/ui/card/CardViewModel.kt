@@ -1,5 +1,6 @@
 package ml.vladmikh.projects.bankcard.ui.card
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -31,10 +32,6 @@ class CardViewModel @Inject constructor(
         bin = input
     }
 
-    private var _cardInfo = MutableLiveData<CardInfoRemoteDataSource>()
-    val cardInfo: LiveData<CardInfoRemoteDataSource> get() = _cardInfo
-
-
     private val _uiState = MutableStateFlow<CardUIState>(CardUIState.Initial)
     val uiState: StateFlow<CardUIState> = _uiState
 
@@ -49,7 +46,7 @@ class CardViewModel @Inject constructor(
     }
 
     fun getCardInfo() {
-
+        //Log.i("abc1", cardInfo.value.toString())
         if (isCorrectInputText(bin)) {
             viewModelScope.launch {
 
