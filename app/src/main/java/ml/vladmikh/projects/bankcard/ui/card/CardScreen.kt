@@ -80,7 +80,7 @@ fun CardScreen(
                if (uiState.error == ErrorLoadingCard.CONNECTION_ERROR) {
                    Text(
                        modifier = Modifier.padding(top = 36.dp),
-                       text = stringResource(R.string.card_instruction),
+                       text = stringResource(R.string.check_your_internet_connection),
                        color  = Color.Red
                    )
                }
@@ -88,7 +88,7 @@ fun CardScreen(
                if (uiState.error == ErrorLoadingCard.CONNECTION_ERROR) {
                    Text(
                        modifier = Modifier.padding(top = 36.dp),
-                       text = stringResource(R.string.card_instruction),
+                       text = stringResource(R.string.unknown_error_contact_support),
                        color  = Color.Red
                    )
                }
@@ -99,7 +99,9 @@ fun CardScreen(
                val cardInfo = uiState.cardInfo
 
                Column(
-                   modifier.padding(16.dp).verticalScroll(ScrollState(0))
+                   modifier
+                       .padding(16.dp)
+                       .verticalScroll(ScrollState(0))
                ) {
                    Row {
                        Text(
