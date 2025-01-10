@@ -17,6 +17,7 @@ viewModelVersion = "2.6.1"
 liveDataVersion = "2.6.1"
 firebaseCrashlyticsBuildtools = "3.0.2"
 materialVersion = "1.4.2"
+roomKtxVersion  = "2.6.1"
 
 
 [libraries]
@@ -52,6 +53,9 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-lifecycle-livedata = {module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "liveDataVersion"}
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
+androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = "roomKtxVersion" }
+androidx-room-annotation-processor = {group = "androidx.room", name = "room-compiler", version.ref = "roomKtxVersion"}
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtxVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

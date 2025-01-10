@@ -62,6 +62,12 @@ dependencies {
     // LiveData
     implementation(libs.androidx.lifecycle.livedata)
 
+    //Room
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.androidx.room.annotation.processor)
+    ksp(libs.androidx.room.annotation.processor)
+
     implementation(libs.androidx.material)
 
     implementation(libs.androidx.core.ktx)

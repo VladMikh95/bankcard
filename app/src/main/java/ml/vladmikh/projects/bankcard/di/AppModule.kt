@@ -1,11 +1,16 @@
 package ml.vladmikh.projects.bankcard.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ml.vladmikh.projects.bankcard.data.local.CardDataBase
+import ml.vladmikh.projects.bankcard.data.local.dao.CardInfoDao
 import ml.vladmikh.projects.bankcard.data.network.ApiService
-import ml.vladmikh.projects.bankcard.data.repository.CardInfoRemoteDataSourceRepository
+import ml.vladmikh.projects.bankcard.data.repository.CardInfoRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -29,12 +34,27 @@ object AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
-
+    @Provides
+    @Singleton
+    fun providesCardInfoDao(database: CardDataBase): CardInfoDao {
+        return database.cardInfoDao()
+    }
 
     @Provides
     @Singleton
-    fun provideCardInfoRemoteDataSourceRepository(apiService: ApiService):
-            CardInfoRemoteDataSourceRepository = CardInfoRemoteDataSourceRepository(apiService)
+    fun provideDatabase(@ApplicationContext context: Context): CardDataBase {
+        return Room.databaseBuilder(
+            context,
+            CardDataBase::class.java,
+            "card_database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
+    @Provides
+    @Singleton
+    fun provideCardInfoRemoteDataSourceRepository(cardInfoDao: CardInfoDao,apiService: ApiService):
+            CardInfoRepository = CardInfoRepository(cardInfoDao, apiService)
 
 }

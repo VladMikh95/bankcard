@@ -85,7 +85,7 @@ fun CardScreen(
                    )
                }
 
-               if (uiState.error == ErrorLoadingCard.CONNECTION_ERROR) {
+               if (uiState.error == ErrorLoadingCard.ERROR_UNKNOWN) {
                    Text(
                        modifier = Modifier.padding(top = 36.dp),
                        text = stringResource(R.string.unknown_error_contact_support),
@@ -97,7 +97,6 @@ fun CardScreen(
            if (uiState is CardUIState.Loaded) {
 
                val cardInfo = uiState.cardInfo
-
                Column(
                    modifier
                        .padding(16.dp)
@@ -107,7 +106,7 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.scheme),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
                            text = cardInfo.scheme,
@@ -117,7 +116,7 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.type),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
                            text = cardInfo.type,
@@ -127,7 +126,7 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.brand),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
                            text = cardInfo.brand,
@@ -137,38 +136,32 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.prepaid),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
-                       if(cardInfo.prepaid){
-                           Text(
-                               text = stringResource(R.string.yes)
-                           )
-                       } else {
-                           Text(
-                               text= stringResource(R.string.no)
-                           )
-                       }
+                       Text(
+                           text = stringResource(R.string.yes)
+                       )
+
                    }
-                   val country = cardInfo.country
                    Text(
                        text = stringResource(R.string.country),
                        fontWeight = FontWeight.Bold,
                    )
                    Text(
                        text = buildString {
-                           append(country.alpha2)
+                           append(cardInfo.countryAlpha2)
                            append(" ")
-                           append(country.name)
+                           append(cardInfo.countryName)
                        }
                    )
                    Row {
                        Text(
                            text = stringResource(R.string.numeric),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = country.numeric
+                           text = cardInfo.countryNumeric
                        )
                    }
 
@@ -176,10 +169,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.emoji),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = country.emoji
+                           text = cardInfo.countryEmoji
                        )
                    }
 
@@ -187,10 +180,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.currency),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = country.currency
+                           text = cardInfo.countryCurrency
                        )
                    }
 
@@ -198,10 +191,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.latitude),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = country.latitude.toString()
+                           text = cardInfo.countryLatitude.toString()
                        )
                    }
 
@@ -209,22 +202,21 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.longitude),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = country.longitude.toString()
+                           text = cardInfo.countryLongitude.toString()
                        )
                    }
 
-                   val bank = cardInfo.bank
                    Row {
                        Text(
                            text = stringResource(R.string.bank),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = bank.name
+                           text = cardInfo.bankName
                        )
                    }
 
@@ -232,10 +224,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.url),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = bank.url
+                           text = cardInfo.bankUrl
                        )
                    }
 
@@ -243,10 +235,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.phone),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = bank.phone
+                           text = cardInfo.bankPhone
                        )
                    }
 
@@ -254,10 +246,10 @@ fun CardScreen(
                        Text(
                            text = stringResource(R.string.city),
                            fontWeight = FontWeight.Bold,
-                           modifier = Modifier.width(80.dp)
+                           modifier = Modifier.width(96.dp)
                        )
                        Text(
-                           text = bank.city
+                           text = cardInfo.bankCity
                        )
                    }
                }

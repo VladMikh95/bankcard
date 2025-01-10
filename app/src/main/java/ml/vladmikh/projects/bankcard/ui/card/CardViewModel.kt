@@ -1,20 +1,16 @@
 package ml.vladmikh.projects.bankcard.ui.card
 
-import android.util.Log
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ml.vladmikh.projects.bankcard.data.network.model.CardInfoRemoteDataSource
-import ml.vladmikh.projects.bankcard.data.repository.CardInfoRemoteDataSourceRepository
+import ml.vladmikh.projects.bankcard.data.repository.CardInfoRepository
 import ml.vladmikh.projects.bankcard.util.ErrorLoadingCard
 import java.io.IOException
 import javax.inject.Inject
@@ -22,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CardViewModel @Inject constructor(
-    private val repository: CardInfoRemoteDataSourceRepository
+    private val repository: CardInfoRepository
 ) : ViewModel(){
 
     var bin by mutableStateOf("")
@@ -46,7 +42,7 @@ class CardViewModel @Inject constructor(
     }
 
     fun getCardInfo() {
-        //Log.i("abc1", cardInfo.value.toString())
+
         if (isCorrectInputText(bin)) {
             viewModelScope.launch {
 
@@ -59,8 +55,8 @@ class CardViewModel @Inject constructor(
                     _uiState.value = CardUIState.Error(ErrorLoadingCard.CONNECTION_ERROR)
                 } catch (e: Exception) {
                     _uiState.value = CardUIState.Error(ErrorLoadingCard.ERROR_UNKNOWN)
-
                 }
+
             }
         } else {
             _uiState.value = CardUIState.Error(ErrorLoadingCard.UNCORRECT_TEXT_LENGTH)
