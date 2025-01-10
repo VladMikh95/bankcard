@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import dagger.hilt.android.AndroidEntryPoint
 import ml.vladmikh.projects.bankcard.ui.card.CardScreen
 import ml.vladmikh.projects.bankcard.ui.card.CardViewModel
@@ -29,6 +28,7 @@ import ml.vladmikh.projects.bankcard.ui.navigation.NavRoutes
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import ml.vladmikh.projects.bankcard.ui.history.HistoryViewModel
 
 
 @AndroidEntryPoint
@@ -77,7 +77,8 @@ fun NavigationHost(modifier: Modifier, navController: NavHostController) {
         }
 
         composable(NavRoutes.History.route) {
-            HistoryScreen()
+            val viewModel = hiltViewModel<HistoryViewModel>()
+            HistoryScreen(modifier,viewModel)
         }
     }
 }

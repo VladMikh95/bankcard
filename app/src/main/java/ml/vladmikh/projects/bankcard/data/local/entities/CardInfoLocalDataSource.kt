@@ -7,7 +7,7 @@ import ml.vladmikh.projects.bankcard.data.model.CardInfo
 @Entity(tableName = "card_info_table")
 class CardInfoLocalDataSource (
 
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val bank_city: String, //связь один к одному
     val bank_name: String,
     val bank_phone: String,
@@ -16,8 +16,8 @@ class CardInfoLocalDataSource (
     val country_alpha2: String,
     val country_currency: String,
     val country_emoji: String,
-    val country_latitude: Int,
-    val country_longitude: Int,
+    val country_latitude: String,
+    val country_longitude: String,
     val country_name: String,
     val country_numeric: String,
     val number_length: Int,
