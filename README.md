@@ -21,8 +21,6 @@
 
 <!-- ABOUT THE PROJECT -->
 https://github.com/user-attachments/assets/475354cb-f414-41f8-a710-5d50d82eb132
-[![Watch](https://github.com/user-attachments/assets/475354cb-f414-41f8-a710-5d50d82eb132)](https://github.com/user-attachments/assets/475354cb-f414-41f8-a710-5d50d82eb132)
-
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
